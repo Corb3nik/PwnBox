@@ -2,6 +2,9 @@
 # Author : Corb3nik
 ####################
 
+# Change password
+sudo echo "ubuntu:ubuntu" | chpasswd
+
 mkdir ~/tools
 cd ~/tools
 
