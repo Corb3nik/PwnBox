@@ -3,7 +3,7 @@
 ####################
 
 # Change password
-sudo echo "ubuntu:ubuntu" | chpasswd
+echo "ubuntu:ubuntu" | sudo chpasswd
 
 mkdir ~/tools
 cd ~/tools
