@@ -10,6 +10,7 @@ cd ~/tools
 
 # Updates
 sudo dpkg --add-architecture i386
+sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
@@ -21,6 +22,7 @@ sudo apt-get -y install ipython
 sudo apt-get -y install wget
 sudo apt-get -y install git
 sudo apt-get -y install cmake
+sudo apt-get -y install neovim
 
 # Libs
 sudo apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386
@@ -70,3 +72,8 @@ sudo cp libssl.so* libcrypto.so* /etc/qemu-binfmt/arm/lib/
 # Binwalk
 cd ~/tools && git clone https://github.com/devttys0/binwalk
 cd binwalk && sudo python setup.py install
+
+####
+# Bashrc
+####
+echo alias vim="nvim" >> ~/.bash_aliases
