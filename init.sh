@@ -74,6 +74,29 @@ cd ~/tools && git clone https://github.com/devttys0/binwalk
 cd binwalk && sudo python setup.py install
 
 ####
-# Bashrc
+# Dotfiles
 ####
-echo alias vim="nvim" >> ~/.bash_aliases
+cd ~/dotfiles
+bash install.sh
+
+####
+# Vim plugins
+####
+
+# Link neovim to vim
+ln -s ~/.vim ~/.config/nvim
+ln -s ~/.vimrc ~/.config/nvim/init.vim
+
+# Install pathogen
+mkdir -p ~/.vim/autoload/
+mkdir -p ~/.vim/bundle/
+wget https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim -O ~/.vim/autoload/pathogen.vim
+
+# Install plugins
+cd ~/.vim/bundle
+git clone https://github.com/kien/ctrlp.vim
+git clone https://github.com/altercation/vim-colors-solarized
+git clone https://github.com/terryma/vim-multiple-cursors
+git clone https://github.com/tpope/vim-commentary
+
+echo "Done."

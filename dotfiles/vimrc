@@ -1,0 +1,89 @@
+" General Settings
+set tabstop=2       " Tabs = 2 spaces
+set shiftwidth=2    " Shifting with '>>' = 2 spaces
+set expandtab       " Tabs are spaces
+set number          " Show line numbers
+set relativenumber  " Set relative line numbering
+set showmatch       " Show matching brackets
+set incsearch       " Search as you type
+set ignorecase      " Case insensitive search
+set list
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. "
+
+let mapleader = ","
+
+" Using arrows is for the weak
+nnoremap <Leader><space> :noh<cr>
+map <Left>  :echo "use h!"<cr>
+map <Right> :echo "use l!"<cr>
+map <Up>    :echo "use k!"<cr>
+map <Down>  :echo "use j!"<cr>
+
+" Stupid shift key fixes
+if has("user_commands")
+    command! -bang -nargs=* -complete=file E e<bang> <args>
+    command! -bang -nargs=* -complete=file W w<bang> <args>
+    command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+    command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+    command! -bang Wa wa<bang>
+    command! -bang WA wa<bang>
+    command! -bang Q q<bang>
+    command! -bang QA qa<bang>
+    command! -bang Qa qa<bang>
+endif
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Automatically Strip trailing whitespace on save
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" Pathogen
+" https://github.com/tpope/vim-pathogen
+execute pathogen#infect()
+
+" Solarized
+" https://github.com/frankier/neovim-colors-solarized-truecolor-only/
+syntax enable
+set background=dark
+colorscheme solarized
+
+" CtrP
+" https://github.com/ctrlpvim/ctrlp.vim
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+
+" Vim-Commentary
+" https://github.com/tpope/vim-commentary
+vmap <Bslash><Bslash> gc
+nmap <Bslash><Bslash> gcgc
+autocmd FileType python setlocal commentstring=#\ %s
+
+" Markdown Preview
+" https://github.com/JamshedVesuna/vim-markdown-preview
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Google Chrome'
+let vim_markdown_preview_github=1
+
+" Golden View
+" https://github.com/zhaocai/GoldenView.Vim
+let g:goldenview__enable_default_mapping = 0
+nmap <silent> <leader>w  <Plug>GoldenViewSplit
+nmap <silent> <C-l>  <Plug>GoldenViewNext
+nmap <silent> <C-h>  <Plug>GoldenViewPrevious
+
+" Filetype specific settings
+autocmd FileType python setlocal shiftwidth=4 softtabstop=4

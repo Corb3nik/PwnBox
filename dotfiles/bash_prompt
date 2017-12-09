@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+function git_prompt() {
+  local g="$(__gitdir)"
+  if [ -n "$g" ]; then
+  # The __git_ps1 function inserts the current git branch where %s is
+      local GIT_PROMPT=`__git_ps1 " → %s"`
+      echo ${GIT_PROMPT}
+  fi
+}
+
+parse_git_dirty () {
+  # If the git status has *any* changes (i.e. dirty)
+  if [[ -n "$(git status --porcelain 2> /dev/null)" ]]; then
+    # echo our character
+    echo " ↺"
+  fi
+}
+
+function parse_git_branch() {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
+}
+
+export PS1="\u@\h\[$RESET\] \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" ➞  \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
+export PS2="\[$RED\]→ \[$RESET\]"
+

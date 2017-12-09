@@ -1,0 +1,27 @@
+#!/bin/bash
+# Vim
+alias vim="nvim"
+alias vi="vim"
+alias v="vim"
+
+# History
+alias h="history"
+
+# Netcat
+alias nc="netcat"
+
+# ls with permanent color output
+alias ls="command ls --color"
+
+# IP addresses
+alias ip="curl http://canhazip.com"
+alias localips="ifconfig | grep 'inet ' | cut -d ' ' -f2 | grep -v 127.0.0.1"
+
+# Aliases using OS dependent flags
+alias flush="/etc/init.d/dns-clean start"     # Flush Directory Service cache
+
+# Pipe my public key to my clipboard.
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# File size
+alias fs="stat -f \"%z bytes\""
