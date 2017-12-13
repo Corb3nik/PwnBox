@@ -55,16 +55,24 @@ cd ~/tools && git clone https://github.com/niklasb/libc-database
 
 # Cross Debugging & Compiling
 sudo apt-get -y install gcc-arm-linux-gnueabihf
+sudo apt-get -y install gcc-powerpc-linux-gnu
 sudo apt-get -y install qemu qemu-user qemu-user-static
 sudo apt-get install 'binfmt*'
 sudo mkdir /etc/qemu-binfmt
 sudo ln -s /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
+sudo ln -s /usr/powerpc-linux-gnu /etc/qemu-binfmt/ppc
 
 # OpenSSL 1.0.0 for ARM
 cd ~/tools && git clone https://github.com/openssl/openssl
 cd openssl && git checkout OpenSSL_1_0_0-stable
 ./Configure linux-armv4 shared && make CC=arm-linux-gnueabihf-gcc
 sudo cp libssl.so* libcrypto.so* /etc/qemu-binfmt/arm/lib/
+
+# uCLibc for PowerPC
+cd ~/tools
+sudo wget https://www.uclibc.org/downloads/binaries/0.9.30/mini-native-powerpc.tar.bz2
+sudo tar -xjf mini-native-powerpc.tar.bz2 && rm mini-native-powerpc.tar.bz2
+sudo cp mini-native-powerpc/lib/* /usr/powerpc-linux-gnu/lib/
 
 ####
 # Forensics/Steganography
