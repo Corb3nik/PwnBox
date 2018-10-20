@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # Provisioning
-  config.vm.provision :file,  :source => "./dotfiles",
+  config.vm.provision :file,  :source => "./templates",
                               :destination => "~/"
 
   config.vm.provision :shell, :path => "init.sh",
