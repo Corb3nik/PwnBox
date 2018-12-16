@@ -30,9 +30,9 @@ if __name__  == "__main__":
 
     binary = ELF(settings['binary'])
     p = None
-
+    env = None
     if settings['libc']:
-        binary.libc = ELF(settings['libc'])
+        env = { "LD_PRELOAD" : settings['libc'] }
 
 
     if args['LOCAL']:
