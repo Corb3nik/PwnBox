@@ -36,7 +36,7 @@ if __name__  == "__main__":
 
 
     if args['LOCAL']:
-        p = process(binary.path)
+        p = process(binary.path, env=env)
 
     if args['REMOTE']:
         if not all([args.IP, args.PORT]):
