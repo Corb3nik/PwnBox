@@ -80,4 +80,14 @@ sudo cp mini-native-powerpc/lib/* /usr/powerpc-linux-gnu/lib/
 cd ~/tools && git clone https://github.com/devttys0/binwalk
 cd binwalk && sudo python setup.py install
 
+####
+# Libc Source code
+####
+sudo apt install -y glibc-source
+
+####
+# ~/.gdbinit
+###
+echo set output-radix 16 > ~/.gdbinit
+
 echo "Done."
