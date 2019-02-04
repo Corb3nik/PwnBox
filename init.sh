@@ -2,6 +2,8 @@
 # Author : Corb3nik
 ####################
 
+export DEBIAN_FRONTEND=noninteractive
+
 mkdir ~/tools
 cd ~/tools
 
@@ -37,6 +39,10 @@ sudo pip install angr
 
 # Pwntools
 sudo pip install --upgrade git+https://github.com/Gallopsled/pwntools
+sudo pip3 install keystone-engine
+sudo pip3 install capstone
+sudo pip3 install ropper
+sudo pip3 install unicorn
 
 # Ropper
 sudo pip install ropper
@@ -88,6 +94,6 @@ sudo apt install -y glibc-source
 ####
 # ~/.gdbinit
 ###
-echo set output-radix 16 > ~/.gdbinit
+echo set output-radix 16 >> ~/.gdbinit
 
 echo "Done."
