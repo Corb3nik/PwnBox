@@ -23,6 +23,7 @@ sudo apt-get -y install git
 sudo apt-get -y install cmake
 sudo apt-get -y install neovim
 sudo apt-get -y install apt-file
+sudo apt-get -y install ruby-full
 
 # Libs
 sudo apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386
@@ -30,6 +31,7 @@ sudo apt-get -y install libc6-dev libc6-dev-i386
 sudo apt-get -y install libc6-dbg libc6-dbg:i386
 sudo apt-get -y install libc6-armhf-armel-cross
 sudo apt-get -y install build-essential gobjc gobjc++ gnustep gnustep-devel libgnustep-base-dev
+sudo apt-get -y install libssl-dev
 
 ####
 # Reverse-Engineering & Pwning
@@ -46,6 +48,9 @@ sudo pip3 install unicorn
 
 # Ropper
 sudo pip install ropper
+
+# One gadget
+sudo gem install one_gadget
 
 # Pwndbg
 cd ~/tools && git clone https://github.com/pwndbg/pwndbg
