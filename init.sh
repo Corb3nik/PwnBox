@@ -4,7 +4,10 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-mkdir ~/tools
+# Exit script on failure
+set -e
+
+mkdir -p ~/tools
 cd ~/tools
 
 # Updates
@@ -16,7 +19,6 @@ sudo apt-get -y upgrade
 # Utilities
 sudo apt-get -y install unzip p7zip-full
 sudo apt-get -y install gdb gdb-multiarch
-sudo apt-get -y install python3-pip python-pip
 sudo apt-get -y install ipython
 sudo apt-get -y install wget
 sudo apt-get -y install git
@@ -33,28 +35,33 @@ sudo apt-get -y install libc6-armhf-armel-cross
 sudo apt-get -y install build-essential gobjc gobjc++ gnustep gnustep-devel libgnustep-base-dev
 sudo apt-get -y install libssl-dev
 
+# PIP
+sudo apt-get -y install python3-pip python-pip
+python2 -m pip install --user --upgrade pip
+python3 -m pip install --user --upgrade pip
+sudo apt-get -y remove python3-pip python-pip
+
 ####
 # Reverse-Engineering & Pwning
 ####
+
 # Angr
-sudo pip install angr
+python3 -m pip install --user angr
 
 # Pwntools
-sudo pip install --upgrade git+https://github.com/Gallopsled/pwntools
-sudo pip3 install keystone-engine
-sudo pip3 install capstone
-sudo pip3 install ropper
-sudo pip3 install unicorn
+python2 -m pip install --user --upgrade git+https://github.com/Gallopsled/pwntools
+python3 -m pip install --user keystone-engine
+python3 -m pip install --user capstone
+python3 -m pip install --user unicorn
 
 # Ropper
-sudo pip install ropper
+python3 -m pip install --user ropper
 
 # One gadget
-sudo gem install one_gadget
+gem install --user -n ~/.local/bin/ one_gadget
 
-# Pwndbg
-cd ~/tools && git clone https://github.com/pwndbg/pwndbg
-cd pwndbg && ./setup.sh
+# GEF
+wget -q -O- https://github.com/hugsy/gef/raw/master/scripts/gef.sh | sh
 
 # Radare2
 cd ~/tools && git clone https://github.com/radare/radare2
@@ -67,7 +74,7 @@ cd ~/tools && git clone https://github.com/niklasb/libc-database
 sudo apt-get -y install gcc-arm-linux-gnueabihf
 sudo apt-get -y install gcc-powerpc-linux-gnu
 sudo apt-get -y install qemu qemu-user qemu-user-static
-sudo apt-get install 'binfmt*'
+sudo apt-get -y install 'binfmt*'
 sudo mkdir /etc/qemu-binfmt
 sudo ln -s /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
 sudo ln -s /usr/powerpc-linux-gnu /etc/qemu-binfmt/ppc
@@ -84,12 +91,6 @@ sudo wget https://www.uclibc.org/downloads/binaries/0.9.30/mini-native-powerpc.t
 sudo tar -xjf mini-native-powerpc.tar.bz2 && rm mini-native-powerpc.tar.bz2
 sudo cp mini-native-powerpc/lib/* /usr/powerpc-linux-gnu/lib/
 
-####
-# Forensics/Steganography
-####
-# Binwalk
-cd ~/tools && git clone https://github.com/devttys0/binwalk
-cd binwalk && sudo python setup.py install
 
 ####
 # Libc Source code
