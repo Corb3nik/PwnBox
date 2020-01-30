@@ -50,6 +50,7 @@ python3 -m pip install --user angr
 
 # Pwntools
 python2 -m pip install --user --upgrade git+https://github.com/Gallopsled/pwntools
+python3 -m pip install --user --upgrade git+https://github.com/Gallopsled/pwntools
 python3 -m pip install --user keystone-engine
 python3 -m pip install --user capstone
 python3 -m pip install --user unicorn
