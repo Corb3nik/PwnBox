@@ -62,6 +62,7 @@ python3 -m pip install --user ropper
 gem install --user -n ~/.local/bin/ one_gadget
 
 # GEF
+python2 -m pip install --user keystone-engine
 wget -q -O- https://github.com/hugsy/gef/raw/master/scripts/gef.sh | sh
 
 # Radare2
