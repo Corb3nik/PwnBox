@@ -24,6 +24,7 @@ sudo apt-get -y install cmake
 sudo apt-get -y install neovim
 sudo apt-get -y install apt-file
 sudo apt-get -y install ruby-full
+sudo apt-get -y install net-tools
 
 # Libs
 sudo apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386
