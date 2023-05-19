@@ -12,14 +12,12 @@ cd ~/tools
 
 # Updates
 sudo dpkg --add-architecture i386
-sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
 # Utilities
 sudo apt-get -y install unzip p7zip-full
 sudo apt-get -y install gdb gdb-multiarch
-sudo apt-get -y install ipython
 sudo apt-get -y install wget
 sudo apt-get -y install git
 sudo apt-get -y install cmake
@@ -33,13 +31,15 @@ sudo apt-get -y install libc6-dev libc6-dev-i386
 sudo apt-get -y install libc6-dbg libc6-dbg:i386
 sudo apt-get -y install libc6-armhf-armel-cross
 sudo apt-get -y install build-essential gobjc gobjc++ gnustep gnustep-devel libgnustep-base-dev
-sudo apt-get -y install libssl-dev
+sudo apt-get -y install libssl-dev libffi-dev
 
 # PIP
-sudo apt-get -y install python3-pip python-pip
-python2 -m pip install --user --upgrade pip
+sudo apt-get -y install python3-pip
 python3 -m pip install --user --upgrade pip
-sudo apt-get -y remove python3-pip python-pip
+sudo apt-get -y remove python3-pip
+
+# iPython
+python3 -m pip install --user ipython
 
 ####
 # Reverse-Engineering & Pwning
@@ -49,8 +49,7 @@ sudo apt-get -y remove python3-pip python-pip
 python3 -m pip install --user angr
 
 # Pwntools
-python2 -m pip install --user --upgrade git+https://github.com/Gallopsled/pwntools
-python3 -m pip install --user --upgrade git+https://github.com/Gallopsled/pwntools
+python3 -m pip install --user --upgrade pwntools
 python3 -m pip install --user keystone-engine
 python3 -m pip install --user capstone
 python3 -m pip install --user unicorn
@@ -62,7 +61,7 @@ python3 -m pip install --user ropper
 gem install --user -n ~/.local/bin/ one_gadget
 
 # GEF
-python2 -m pip install --user keystone-engine
+python3 -m pip install --user keystone-engine
 wget -q -O- https://github.com/hugsy/gef/raw/master/scripts/gef.sh | sh
 
 # Radare2
