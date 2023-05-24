@@ -63,7 +63,7 @@ gem install --user -n ~/.local/bin/ one_gadget
 
 # GEF
 python3 -m pip install --user keystone-engine
-wget -q -O- https://github.com/hugsy/gef/raw/master/scripts/gef.sh | sh
+bash -c "$(wget https://gef.blah.cat/sh -O -)"
 
 # Radare2
 cd ~/tools && git clone https://github.com/radare/radare2
@@ -92,6 +92,12 @@ cd ~/tools
 sudo wget https://www.uclibc.org/downloads/binaries/0.9.30/mini-native-powerpc.tar.bz2
 sudo tar -xjf mini-native-powerpc.tar.bz2 && rm mini-native-powerpc.tar.bz2
 sudo cp mini-native-powerpc/lib/* /usr/powerpc-linux-gnu/lib/
+
+####
+# Hardware
+####
+python3 -m pip install --user esptool
+
 
 
 ####
