@@ -11,7 +11,6 @@ mkdir -p ~/tools
 cd ~/tools
 
 # Updates
-sudo dpkg --add-architecture i386
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
@@ -27,17 +26,12 @@ sudo apt-get -y install ruby-full
 sudo apt-get -y install net-tools
 
 # Libs
-sudo apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386
-sudo apt-get -y install libc6-dev libc6-dev-i386
-sudo apt-get -y install libc6-dbg libc6-dbg:i386
-sudo apt-get -y install libc6-armhf-armel-cross
 sudo apt-get -y install build-essential gobjc gobjc++ gnustep gnustep-devel libgnustep-base-dev
 sudo apt-get -y install libssl-dev libffi-dev
 
 # PIP
 sudo apt-get -y install python3-pip
 python3 -m pip install --user --upgrade pip
-sudo apt-get -y remove python3-pip
 
 # iPython
 python3 -m pip install --user ipython
@@ -59,46 +53,66 @@ python3 -m pip install --user unicorn
 python3 -m pip install --user ropper
 
 # One gadget
-gem install --user -n ~/.local/bin/ one_gadget
+gem install --user-install one_gadget
 
 # GEF
 python3 -m pip install --user keystone-engine
-bash -c "$(wget https://gef.blah.cat/sh -O -)"
+bash -c "$(wget -qO- https://gef.blah.cat/sh)"
 
 # Radare2
-cd ~/tools && git clone https://github.com/radare/radare2
+cd ~/tools
+rm -rf ~/tools/radare2
+git clone https://github.com/radareorg/radare2
 cd radare2 && ./sys/install.sh
 
 # libc Database
-cd ~/tools && git clone https://github.com/niklasb/libc-database
+cd ~/tools
+rm -rf ~/tools/libc-database
+git clone https://github.com/niklasb/libc-database
 
 # Cross Debugging & Compiling
 sudo apt-get -y install gcc-arm-linux-gnueabihf
-sudo apt-get -y install gcc-powerpc-linux-gnu
-sudo apt-get -y install qemu qemu-user qemu-user-static
+sudo apt-get -y install qemu qemu-user qemu-user-static qemu-system-misc
 sudo apt-get -y install 'binfmt*'
 sudo mkdir /etc/qemu-binfmt
 sudo ln -s /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
 sudo ln -s /usr/powerpc-linux-gnu /etc/qemu-binfmt/ppc
 
-# OpenSSL 1.0.0 for ARM
-cd ~/tools && git clone https://github.com/openssl/openssl
-cd openssl && git checkout OpenSSL_1_0_0-stable
-./Configure linux-armv4 shared && make CC=arm-linux-gnueabihf-gcc
-sudo cp libssl.so* libcrypto.so* /etc/qemu-binfmt/arm/lib/
+# # OpenSSL 1.0.0 for ARM
+# cd ~/tools && git clone https://github.com/openssl/openssl
+# cd openssl && git checkout OpenSSL_1_0_0-stable
+# ./Configure linux-armv4 shared && make CC=arm-linux-gnueab
 
-# uCLibc for PowerPC
+# # uCLibc for PowerPC
+# cd ~/tools
+# sudo wget https://www.uclibc.org/downloads/binaries/0.9.30/mini-native-powerpc.tar.bz2
+# sudo tar -xjf mini-native-powerpc.tar.bz2 && rm mini-native-powerpc.tar.bz2
+# sudo cp mini-native-powerpc/lib/* /usr/powerpc-linux-gnu/lib/
+
+###
+# Web
+###
+
+# Java
+sudo apt-get -y install openjdk-17-jdk
+
+# YSoSerial
 cd ~/tools
-sudo wget https://www.uclibc.org/downloads/binaries/0.9.30/mini-native-powerpc.tar.bz2
-sudo tar -xjf mini-native-powerpc.tar.bz2 && rm mini-native-powerpc.tar.bz2
-sudo cp mini-native-powerpc/lib/* /usr/powerpc-linux-gnu/lib/
+sudo wget https://github.com/frohoff/ysoserial/releases/latest/download/ysoserial-all.jar
 
 ####
 # Hardware
 ####
+
+# esptool
 python3 -m pip install --user esptool
 
+# esp32knife
+cd ~/tools && git clone https://github.com/BlackVS/esp32knife
+cd esp32knife
+python3 -m pip install -r requirements.txt
 
+# qemu-system-xtensa
 
 ####
 # Libc Source code
