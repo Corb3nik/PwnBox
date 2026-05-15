@@ -71,12 +71,14 @@ rm -rf ~/tools/libc-database
 git clone https://github.com/niklasb/libc-database
 
 # Cross Debugging & Compiling
+sudo apt-get -y install libc6-amd64-cross
 sudo apt-get -y install gcc-arm-linux-gnueabihf
 sudo apt-get -y install qemu qemu-user qemu-user-static qemu-system-misc
 sudo apt-get -y install 'binfmt*'
 sudo mkdir /etc/qemu-binfmt
 sudo ln -s /usr/arm-linux-gnueabihf /etc/qemu-binfmt/arm
 sudo ln -s /usr/powerpc-linux-gnu /etc/qemu-binfmt/ppc
+sudo ln -nsf /usr/x86_64-linux-gnu /etc/qemu-binfmt/x86_64
 
 # # OpenSSL 1.0.0 for ARM
 # cd ~/tools && git clone https://github.com/openssl/openssl
